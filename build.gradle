@@ -1,0 +1,33 @@
+plugins {
+    id 'application'
+}
+
+application {
+    mainClass = 'ru.nsu.fit.enterprise.Main'
+}
+
+group 'ru.nsu.fit.enterprise'
+version '1.0-SNAPSHOT'
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    implementation 'stax:stax-api:1.0.1'
+    implementation 'org.slf4j:slf4j-api:2.0.6'
+    implementation 'org.apache.commons:commons-compress:1.22'
+    implementation 'commons-cli:commons-cli:1.5.0'
+    compileOnly 'org.projectlombok:lombok:1.18.26'
+    annotationProcessor 'org.projectlombok:lombok:1.18.26'
+    implementation 'ch.qos.logback:logback-classic:1.4.5'
+    testImplementation 'org.junit.jupiter:junit-jupiter-api:5.8.1'
+    testRuntimeOnly 'org.junit.jupiter:junit-jupiter-engine:5.8.1'
+    testCompileOnly 'org.projectlombok:lombok:1.18.12'
+    testAnnotationProcessor 'org.projectlombok:lombok:1.18.12'
+    testImplementation 'ch.qos.logback:logback-classic:1.4.5'
+}
+
+test {
+    useJUnitPlatform()
+}
