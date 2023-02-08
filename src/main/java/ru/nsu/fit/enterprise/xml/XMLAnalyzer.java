@@ -1,6 +1,7 @@
 package ru.nsu.fit.enterprise.xml;
 
 import lombok.extern.slf4j.Slf4j;
+import org.apache.commons.compress.compressors.bzip2.BZip2CompressorInputStream;
 
 import javax.xml.namespace.QName;
 import javax.xml.stream.XMLEventReader;
@@ -9,10 +10,7 @@ import javax.xml.stream.XMLStreamException;
 import javax.xml.stream.events.Attribute;
 import javax.xml.stream.events.StartElement;
 import javax.xml.stream.events.XMLEvent;
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
-import java.io.IOException;
+import java.io.*;
 import java.util.List;
 import java.util.Map;
 
@@ -30,8 +28,8 @@ public class XMLAnalyzer {
     }
 
     public void analyze() {
-        try (FileInputStream fileInputStream = new FileInputStream(file)){
-            XMLEventReader reader = XMLInputFactory.newInstance().createXMLEventReader(fileInputStream);
+        try (InputStream inputStream = new BZip2CompressorInputStream(new BufferedInputStream(new FileInputStream(file)), true)) {
+            XMLEventReader reader = XMLInputFactory.newInstance().createXMLEventReader(inputStream);
             while (reader.hasNext()) {
                 XMLEvent nextEvent = reader.nextEvent();
                 if (nextEvent.isStartElement()) {

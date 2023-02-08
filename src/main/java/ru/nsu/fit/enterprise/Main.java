@@ -9,7 +9,7 @@ import java.io.File;
 public class Main {
     public static void main(String[] args) {
         log.info("Application was started!");
-        XMLAnalyzer xmlAnalyzer = new XMLAnalyzer(new File("C:\\Users\\cherp\\IdeaProjects\\RU-NVS.osm"));
+        XMLAnalyzer xmlAnalyzer = new XMLAnalyzer(new File("C:\\Users\\cherp\\IdeaProjects\\RU-NVS.osm.bz2"));
         xmlAnalyzer.analyze();
         xmlAnalyzer.printInfo();
         log.info("Application was finished!");
