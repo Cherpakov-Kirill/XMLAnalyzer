@@ -12,6 +12,7 @@ import javax.xml.stream.events.XMLEvent;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.util.List;
 import java.util.Map;
 
@@ -29,8 +30,8 @@ public class XMLAnalyzer {
     }
 
     public void analyze() {
-        try {
-            XMLEventReader reader = XMLInputFactory.newInstance().createXMLEventReader(new FileInputStream(file));
+        try (FileInputStream fileInputStream = new FileInputStream(file)){
+            XMLEventReader reader = XMLInputFactory.newInstance().createXMLEventReader(fileInputStream);
             while (reader.hasNext()) {
                 XMLEvent nextEvent = reader.nextEvent();
                 if (nextEvent.isStartElement()) {
@@ -51,7 +52,7 @@ public class XMLAnalyzer {
                     }
                 }
             }
-        } catch (XMLStreamException | FileNotFoundException e) {
+        } catch (XMLStreamException | IOException e) {
             throw new RuntimeException(e);
         }
     }
